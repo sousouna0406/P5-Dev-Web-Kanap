@@ -9,4 +9,7 @@ getProduct(productID).then((product) => {
   price.innerHTML = product.price;
   const description = document.getElementById("description");
   description.innerHTML = product.description;
+  const imageUrl = document.getElementById("imageUrl");
+  imageUrl.src = product.imageUrl;
+  imageUrl.alt = product.altTxt;
 });
