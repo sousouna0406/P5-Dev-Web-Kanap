@@ -12,14 +12,18 @@ getProduct(productID).then((product) => {
   const imageUrl = document.getElementById("imageUrl");
   imageUrl.src = product.imageUrl;
   imageUrl.alt = product.altTxt;
+
   const choose = document.getElementById("colors");
+
   let option = document.createElement("option");
   option.innerHTML = "SVP, choisissez une couleur";
   choose.appendChild(option);
-  let colorOne = document.createElement("option");
-  colorOne.innerHTML = product.colors[0];
-  choose.appendChild(colorOne);
-  let colorTwo = document.createElement("option");
-  colorTwo.innerHTML = product.colors[1];
-  choose.appendChild(colorTwo);
+
+  for (const colors of product.colors) {
+    let numberColor = document.createElement("option");
+    numberColor.value = `html/product.html?id=${colors}
+  `;
+    numberColor.innerHTML = colors;
+    choose.appendChild(numberColor);
+  }
 });
