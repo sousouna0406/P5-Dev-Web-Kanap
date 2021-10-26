@@ -19,11 +19,11 @@ getProduct(productID).then((product) => {
   option.innerHTML = "SVP, choisissez une couleur";
   choose.appendChild(option);
 
-  for (const colors of product.colors) {
+  for (const color of product.colors) {
     let numberColor = document.createElement("option");
-    numberColor.value = `html/product.html?id=${colors}
+    numberColor.value = `html/product.html?id=${color}
   `;
-    numberColor.innerHTML = colors;
+    numberColor.innerHTML = color;
     choose.appendChild(numberColor);
   }
 });
