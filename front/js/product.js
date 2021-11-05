@@ -1,9 +1,10 @@
 const params = new URLSearchParams(window.location.search);
 const productID = params.get("id");
-// creation d'une variable cart  et On renvoie la valeur de la variable mis en parametre
-// sinon elle met à jour la valeur si la clé existe déjà.
+// creation d'une variable cart
+// puis on vas dans le localStorage et avec la methode getItem on lis la clef produit
+//si il y en a pas on cree un array
 let cart = localStorage.getItem("cart") || "[]";
-//  on la traduit avec JSON.parse en format JS
+//  on converti les donnée en format JSON dans le localStorage avec JSON.parse en objet JS
 cart = JSON.parse(cart);
 let product;
 
