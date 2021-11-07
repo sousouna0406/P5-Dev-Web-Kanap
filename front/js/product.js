@@ -88,6 +88,8 @@ function addProductCart(product, color, quantity) {
     name: product.name,
     quantity: quantity,
     color: color,
+    image: product.imageUrl,
+    price: product.price,
   });
 }
 
