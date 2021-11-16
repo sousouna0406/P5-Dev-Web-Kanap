@@ -24,8 +24,7 @@ getProduct(productID).then((productData) => {
 
   for (const color of product.colors) {
     let numberColor = document.createElement("option");
-    numberColor.value = `html/product.html?id=${color}
-  `;
+    numberColor.value = color;
     numberColor.innerHTML = color;
     choose.appendChild(numberColor);
   }
@@ -90,6 +89,7 @@ function addProductCart(product, color, quantity) {
     color: color,
     image: product.imageUrl,
     price: product.price,
+    alte: product.altTxt,
   });
 }
 
