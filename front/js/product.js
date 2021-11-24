@@ -10,7 +10,7 @@ cart = JSON.parse(cart);
 let product;
 //Si il nya pas de productid on renvoie en page d'acceuil
 if (productID) {
-  console.log("afficher product dans la la page product");
+  console.log("afficher product dans la page product");
 } else {
   console.log("ko");
   window.location.href = "/html/index.js";
