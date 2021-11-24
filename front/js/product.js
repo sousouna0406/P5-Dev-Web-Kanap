@@ -9,11 +9,11 @@ let cart = localStorage.getItem("cart") || "[]";
 cart = JSON.parse(cart);
 let product;
 //Si il nya pas de productid on renvoie en page d'acceuil
-if (productID) {
-  console.log("afficher product dans la page product");
-} else {
+if (!productID) {
   console.log("ko");
-  window.location.href = "/html/index.js";
+  window.location.href = "/index.html";
+} else {
+  console.log("afficher product dans la page product");
 }
 getProduct(productID).then((productData) => {
   product = productData;

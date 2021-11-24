@@ -1,4 +1,6 @@
+// déclaration d'une const params qui crée un prototype de L url
 const params = new URLSearchParams(window.location.search);
+// declaration d'une const orderID qui cible juste L'id de l'url  de la commande
 const orderID = params.get("orderId");
 document.getElementById("orderId").innerHTML = orderID;
 // recuperer la  variable orderId qui est dans les quiery params : orderIdqp
@@ -6,9 +8,9 @@ document.getElementById("orderId").innerHTML = orderID;
 // sinon je redirige vers la page d'acceuil
 const orderIdqp = orderID;
 console.log(orderIdqp);
-if (orderIdqp === orderID) {
-  console.log("afficher l'orderId dans la page confirmation");
-} else {
+if (!orderIdqp) {
   console.log("ko");
-  window.location.href = "/html/index.js";
+  window.location.href = "/index.html";
+} else {
+  console.log("afficher l'orderId dans la page confirmation");
 }
