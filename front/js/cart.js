@@ -148,25 +148,22 @@ function setDeleteEvent() {
 
 //FONCTION DE CHANGEMENT DE LA QUANTITÉ
 function setQuantityEvent() {
-  let quantityInput = document.querySelectorAll(".itemQuantity"); // recuperer tout les quantités
-  console.log(quantityInput);
-
+  let quantityInput = document.querySelectorAll(".itemQuantity");
+  // Recuperer tout les quantités
   for (let n = 0; n < quantityInput.length; n++) {
-    //cibler le produit  souhaiter et supprimer grâce à son identifiant et sa couleur.
-
+    //Boucle for pour parcourir le quantityInput(tout les quantitées du panier)
     quantityInput[n].addEventListener("change", (e) => {
-      // ecouter la variable quantityInput avec "change" pour que l'utilisateur change de quantité dans le panier
-      // Declaration d'une nouvelle variable qui permet de mettre a jour la nouvelle valeur de la quantité
+      //  Écoute de la variable quantityInput avec "change" pour que l'utilisateur change de quantité dans le panier
+      // Déclaration d'une nouvelle variable qui permet de mettre a jour la nouvelle valeur de la quantité
       const newQuantity = e.target.value;
-      console.log(newQuantity);
-
+      // Condition if pour verifier que la quantitée est supérieur a 0 sinon message alerte et ne rajoute rien au localstorage
       if (newQuantity > 0) {
         console.log("positif");
       } else {
         alert("Quantitée insuffisante !");
         return;
       }
-
+      // Condition if pour verifier que la quantitée est inférieur a 100 sinon message alerte et ne rajoute rien au localstorage
       if (newQuantity > 100) {
         console.log("flop");
         alert("La quantitée maximum est de 100 pour cet article.");
@@ -175,11 +172,11 @@ function setQuantityEvent() {
         console.log("ok");
       }
 
-      // declation de la variable elt qui permet de trouver l element cibler dans le DOM
+      // Déclation de la variable elt qui permet de trouver l'élément cibler dans le DOM
       const elt = quantityInput[n].closest("article");
-      // declaration de la variable indexToUpdade qui permet de trouver l'index des element a changer
+      // Déclaration de la variable indexToUpdade qui permet de trouver l'index des element a changer
       const indexToUpdade = cart.findIndex((item) => {
-        // dans cette fontion on si les index trouver ont les meme couleur et meme id
+        // Dans cette fontion on verifie si les index trouver ont les meme couleur et meme id
         return (
           item.color === elt.getAttribute("data-color") &&
           item._id === elt.getAttribute("data-id")
@@ -202,7 +199,7 @@ setQuantityEvent();
 
 // Selection du bouton Commander
 const form = document.getElementById("contact-form");
-//console.log(orderedBtn);
+// ecoute de la const form lorsqu’un formulaire est soumis au serveur avec submit
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const erreurMessage = {
@@ -220,7 +217,6 @@ form.addEventListener("submit", (e) => {
     ville: document.getElementById("city").value,
     email: document.getElementById("email").value,
   };
-  //console.log(valuesForm);
   // declaration de la variable pour message d' alerte ville nom premon
   const regeXalert = (value) => {
     return `${value}: Les caractères spéciaux ainsi que les chiffres ne sont pas autoriser, entre 2 et 25 caractères`;
@@ -235,6 +231,7 @@ form.addEventListener("submit", (e) => {
       value
     );
   };
+  // declaration de la variable pour message d' alerte sur Email
   const regeXalertEmail = (value) => {
     return `${value}: Saisies incorrect.`;
   };
@@ -272,6 +269,7 @@ form.addEventListener("submit", (e) => {
       return false;
     }
   }
+  //fonction contrôle de la validiter de l'email
   function controleEmail() {
     const lEmail = valuesForm.email;
     if (regeXemail(lEmail)) {
