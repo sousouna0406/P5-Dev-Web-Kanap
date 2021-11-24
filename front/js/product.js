@@ -1,5 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const productID = params.get("id");
+console.log(productID);
 // creation d'une variable cart
 // puis on vas dans le localStorage et avec la methode getItem on lis la clef produit
 //si il y en a pas on cree un array
@@ -7,7 +8,13 @@ let cart = localStorage.getItem("cart") || "[]";
 //  on converti les donnée en format JSON dans le localStorage avec JSON.parse en objet JS
 cart = JSON.parse(cart);
 let product;
-
+//Si il nya pas de productid on renvoie en page d'acceuil
+if (productID) {
+  console.log("afficher product dans la la page product");
+} else {
+  console.log("ko");
+  window.location.href = "/html/index.js";
+}
 getProduct(productID).then((productData) => {
   product = productData;
   const title = document.getElementById("title");
@@ -92,43 +99,3 @@ function addProductCart(product, color, quantity) {
     alte: product.altTxt,
   });
 }
-
-// let foundId = cart.find((cart) => console.log(cart.id));
-// let foundColor = cart.forEach((cart) => console.log(cart.color));
-// let foundQuantiter = cart.forEach((cart) => console.log(cart.quantity));
-// for (let i = 0; i < cart.length; i++) {
-//   if (foundId === cart.id && foundColor === cart.color) {
-//     console.log("même produit");
-
-//     result[i] = parseInt(cart.quantity) + parseInt(foundQuantiter);
-
-//     console.log(result[i]);
-
-//     return cart;
-//   } else {
-//     console.log("produit différent");
-//     cart.push();
-//     return cart;
-//   }
-// }
-
-// for (product in cart) {
-
-//   if (
-//     foundId === cart.id &&
-//     foundColor === cart.color &&
-//     foundQuantité != cart.quantity
-//   ) {
-//     console.log(cart.splice(1));
-
-//     // let first = cart.shift();
-//     // console.log(first);
-//   }
-// }
-
-// let first = cart.shift();
-// console.log(first);
-
-// }
-// const iDcart = cart.find((id) => cart.id === product._id);
-// console.log(id);
