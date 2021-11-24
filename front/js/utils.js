@@ -16,8 +16,20 @@ function getProduct(id) {
     });
 }
 
-async function orderProducts(order) {
-  // ici réaliser une requete POST pour passer une commande
+function orderProducts(order) {
+  return fetch(api + "products/order", {
+    method: "POST",
+    body: JSON.stringify(order),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((order) => {
+      return order;
+    });
 }
+
 // getProducts();
 // getProduct("107fb5b75607497b96722bda5b504926");

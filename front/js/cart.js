@@ -200,53 +200,18 @@ setQuantityEvent();
 
 //------------------------ formulaire utilisateur ---------------------------//
 
-function displayForm() {
-  const stuctureFormulaire = `
-
-  <div class="cart__order">
-              <form method="get" class="cart__order__form">
-                <div class="cart__order__form__question">
-                  <label for="firstName">Prénom: </label>
-                  <input type="text" name="firstName" id="firstName" required />
-                  <p id="firstNameErrorMsg">
-                    <!-- ci est un message d'erreur -->
-                  </p>
-                </div>
-                <div class="cart__order__form__question">
-                  <label for="lastName">Nom: </label>
-                  <input type="text" name="lastName" id="lastName" required />
-                  <p id="lastNameErrorMsg"></p>
-                </div>
-                <div class="cart__order__form__question">
-                  <label for="address">Adresse: </label>
-                  <input type="text" name="address" id="address" required />
-                  <p id="addressErrorMsg"></p>
-                </div>
-                <div class="cart__order__form__question">
-                  <label for="city">Ville: </label>
-                  <input type="text" name="city" id="city" required />
-                  <p id="cityErrorMsg"></p>
-                </div>
-                <div class="cart__order__form__question">
-                  <label for="email">Email: </label>
-                  <input type="email" name="email" id="email" required />
-                  <p id="emailErrorMsg"></p>
-                </div>
-                <div class="cart__order__form__submit">
-                  <input type="submit" value="Commander !" id="order" />
-                </div>
-              </form>
-            </div>
-  `;
-  emplacementForm.innerHTML = stuctureFormulaire;
-}
-//APPEL DE LA FONCTION DISPLAYFORM
-displayForm();
 // Selection du bouton Commander
-const orderedBtn = document.getElementById("order");
+const form = document.getElementById("contact-form");
 //console.log(orderedBtn);
-orderedBtn.addEventListener("click", (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
+  const erreurMessage = {
+    prenom: document.getElementById("firstNameErrorMsg"),
+    nom: document.getElementById("lastNameErrorMsg"),
+    adresse: document.getElementById("addressErrorMsg"),
+    ville: document.getElementById("cityErrorMsg"),
+    email: document.getElementById("emailErrorMsg"),
+  };
   //Recuperation des valeurs du formulaire et les mettres a jour
   const valuesForm = {
     prenom: document.getElementById("firstName").value,
@@ -258,7 +223,7 @@ orderedBtn.addEventListener("click", (e) => {
   //console.log(valuesForm);
   // declaration de la variable pour message d' alerte ville nom premon
   const regeXalert = (value) => {
-    return `${value}: Les caractères spéciaux ainsi que les chiffres ne sont pas autoriser`;
+    return `${value}: Les caractères spéciaux ainsi que les chiffres ne sont pas autoriser, entre 2 et 25 caractères`;
   };
   // declaration de la variable regEx pour la mettre dans les fonction nom prenom ville
   const regeX = (value) => {
@@ -278,9 +243,10 @@ orderedBtn.addEventListener("click", (e) => {
   function controleFirstName() {
     const lePrenom = valuesForm.prenom;
     if (regeX(lePrenom)) {
+      erreurMessage.prenom.innerHTML = "";
       return true;
     } else {
-      alert(regeXalert("Prémon"));
+      erreurMessage.prenom.innerHTML = regeXalert("Prémon");
       return false;
     }
   }
@@ -288,9 +254,10 @@ orderedBtn.addEventListener("click", (e) => {
   function controleName() {
     const leNom = valuesForm.nom;
     if (regeX(leNom)) {
+      erreurMessage.nom.innerHTML = "";
       return true;
     } else {
-      alert(regeXalert("Nom"));
+      erreurMessage.nom.innerHTML = regeXalert("Nom");
       return false;
     }
   }
@@ -298,18 +265,20 @@ orderedBtn.addEventListener("click", (e) => {
   function controleCity() {
     const laVille = valuesForm.ville;
     if (regeX(laVille)) {
+      erreurMessage.ville.innerHTML = "";
       return true;
     } else {
-      alert(regeXalert("Ville"));
+      erreurMessage.ville.innerHTML = regeXalert("Ville");
       return false;
     }
   }
   function controleEmail() {
     const lEmail = valuesForm.email;
     if (regeXemail(lEmail)) {
+      erreurMessage.email.innerHTML = "";
       return true;
     } else {
-      alert(regeXalertEmail("Email"));
+      erreurMessage.email.innerHTML = regeXalertEmail("Email");
       return false;
     }
   }
@@ -323,15 +292,23 @@ orderedBtn.addEventListener("click", (e) => {
   ) {
     // mettre l object valuesForm dans le localStorage
     localStorage.setItem("valuesForm", JSON.stringify(valuesForm));
-  }
-  //  else {
-  //   alert("Veuillez vérifier vos données saisies.");
-  // }
 
-  // Mettre les value dans un obj contact avec les produit dans le panier et les valeurs du formulaire
-  const contact = {
-    cart,
-    valuesForm,
-  };
-  console.log(contact);
+    // faire un object orderId
+    const order = {
+      contact: {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        address: document.getElementById("address").value,
+        city: document.getElementById("city").value,
+        email: document.getElementById("email").value,
+      },
+      products: cart.map((e) => e._id), //array of product _id
+    };
+    console.log(order);
+    // appel de fetch avec la method post
+    orderProducts(order).then((order) => {
+      console.log(order);
+      window.location.href = "/html/confirmation.html?orderId=" + order.orderId;
+    });
+  }
 });
