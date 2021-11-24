@@ -308,7 +308,6 @@ form.addEventListener("submit", (e) => {
     // appel de fetch avec la method post
     orderProducts(order).then((order) => {
       window.location.href = "/html/confirmation.html?orderId=" + order.orderId;
-      localStorage.setItem("orderId", order.orderId);
       console.log(order.orderId);
     });
   }
