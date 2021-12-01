@@ -10,10 +10,10 @@ cart = JSON.parse(cart);
 let product;
 //Si il nya pas de productid on renvoie en page d'acceuil
 if (!productID) {
-  console.log("afficher product dans la page product");
+  console.log("ko");
   window.location.href = "/index.html";
 } else {
-  console.log("ko");
+  console.log("afficher product dans la page product");
 }
 getProduct(productID).then((productData) => {
   product = productData;
@@ -84,7 +84,7 @@ btnCart.addEventListener("click", () => {
   // on ajoute la variable cart au localStorage et on la traduit du format JS au chaine JSON
   localStorage.setItem("cart", JSON.stringify(cart));
 
-  alert("Votre article a bien été ajouté au panier !");
+  alert("Votre(Vos) article(s) a(ont) bien été ajouté(s) au panier !");
 });
 
 function addProductCart(product, color, quantity) {

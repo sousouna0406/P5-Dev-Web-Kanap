@@ -9,8 +9,8 @@ document.getElementById("orderId").innerHTML = orderID;
 const orderIdqp = orderID;
 console.log(orderIdqp);
 if (!orderIdqp) {
-  console.log("afficher l'orderId dans la page confirmation");
+  console.log("ko");
   window.location.href = "/index.html";
 } else {
-  console.log("ko");
+  console.log("afficher l'orderId dans la page confirmation");
 }
