@@ -74,6 +74,7 @@ btnCart.addEventListener("click", () => {
         // APPEL DE LA FONCTION addProductCart si on a pas trouver id
         // Si on a pas trouver l' Id et qu'on arrive au bout du tableau on ajoute le produit
         addProductCart(product, color, quantity);
+        break;
       }
     }
   } else {
