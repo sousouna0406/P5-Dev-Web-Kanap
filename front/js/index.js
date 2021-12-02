@@ -1,5 +1,5 @@
 const itemsContainer = document.getElementById("items");
-
+// Appel de la fonction getProduct qui permet l'affichage de tout les produits dans la page d'acceuil
 getProducts().then((products) => {
   for (const product of products) {
     let lien = document.createElement("a");

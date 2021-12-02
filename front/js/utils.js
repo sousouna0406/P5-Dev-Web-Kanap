@@ -1,5 +1,5 @@
 const api = "http://localhost:3000/api/";
-
+// fonction getProducts pour récuperer l'ensemble des produits de l'API
 function getProducts() {
   return fetch(api + "products")
     .then((res) => res.json())
@@ -7,7 +7,7 @@ function getProducts() {
       return products;
     });
 }
-
+// Fonction getProduct pour récuperer un produit grâce a son ID
 function getProduct(id) {
   return fetch(api + "products/" + id)
     .then((res) => res.json())
@@ -15,7 +15,7 @@ function getProduct(id) {
       return product;
     });
 }
-
+// Fonction orderProduct pour envoyer la commande des produits selectionnée dans le panier
 function orderProducts(order) {
   return fetch(api + "products/order", {
     method: "POST",
@@ -30,6 +30,3 @@ function orderProducts(order) {
       return order;
     });
 }
-
-// getProducts();
-// getProduct("107fb5b75607497b96722bda5b504926");

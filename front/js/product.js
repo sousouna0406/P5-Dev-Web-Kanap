@@ -15,6 +15,7 @@ if (!productID) {
 } else {
   console.log("afficher product dans la page product");
 }
+//Appel de la fonction getProduct qui prend en parametre l Id du produit et en suite qui nous rapporte les details du produit
 getProduct(productID).then((productData) => {
   product = productData;
   const title = document.getElementById("title");
@@ -87,9 +88,8 @@ btnCart.addEventListener("click", () => {
 
   alert("Votre(Vos) article(s) a(ont) bien été ajouté(s) au panier !");
 });
-
+// fonction pour pousser le ou les produit(s) dans le panier (cart)
 function addProductCart(product, color, quantity) {
-  // fonction pour pousser le ou les produit(s) dans le panier (cart)
   cart.push({
     _id: product._id,
     name: product.name,
