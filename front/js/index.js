@@ -3,7 +3,7 @@ const itemsContainer = document.getElementById("items");
 getProducts().then((products) => {
   for (const product of products) {
     let lien = document.createElement("a");
-    lien.href = `html/product.html?id=${product._id}`;
+    lien.href = `./product.html?id=${product._id}`;
     lien.innerHTML = `
     <article>
         <img
