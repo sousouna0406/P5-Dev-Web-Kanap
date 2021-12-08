@@ -305,7 +305,8 @@ form.addEventListener("submit", (e) => {
     console.log(order);
     // appel de fetch avec la method post
     orderProducts(order).then((order) => {
-      window.location.href = "/html/confirmation.html?orderId=" + order.orderId;
+      window.location.href =
+        "/front/html/confirmation.html?orderId=" + order.orderId;
       console.log(order.orderId);
     });
   }

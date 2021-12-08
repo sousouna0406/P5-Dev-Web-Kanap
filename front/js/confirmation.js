@@ -1,5 +1,6 @@
 // déclaration d'une const params qui crée un prototype de L url
 const params = new URLSearchParams(window.location.search);
+console.log(params);
 // declaration d'une const orderID qui cible juste L'id de l'url  de la commande
 const orderID = params.get("orderId");
 document.getElementById("orderId").innerHTML = orderID;
