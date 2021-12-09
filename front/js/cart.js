@@ -3,7 +3,6 @@
 // RECUPERATION des articles du  localStorage
 let cart = localStorage.getItem("cart") || "[]";
 cart = JSON.parse(cart);
-console.log(cart);
 // variable pour se situer dans la section cart__items du html
 const itemsContainer = document.getElementById("cart__items");
 //console.log(itemsContainer2);
@@ -22,10 +21,10 @@ function displayItems() {
     // declaration d'une variable pour afficher sur le HTML de maniere dynamique que la panier est vide
     //console.log("panier vide");
     const panierVide = `
-    <div class ="empty-cart">
-    <p> Le panier est vide.<br><br>Ajoutez des articles au panier.</p>
-    </div>
-    `;
+                        <div class ="empty-cart">
+                        <p> Le panier est vide.<br><br>Ajoutez des articles au panier.</p>
+                        </div>
+                       `;
     itemsContainer.innerHTML = panierVide;
   } else {
     //console.log("panier plein");
@@ -35,38 +34,37 @@ function displayItems() {
       cartStructure =
         cartStructure +
         `
-    <article class="cart__item" data-id="${cart[i]._id}" data-color="${cart[i].color}">
-    <div class="cart__item__img">
-      <img
-        src=${cart[i].image}
-        alt=${cart[i].alte}
-      />
-    </div>
-    <div class="cart__item__content">
-      <div class="cart__item__content__titlePrice">
-        <h2>${cart[i].name} - ${cart[i].color}</h2>
-        <p>${cart[i].price} €</p>
-      </div>
-      <div class="cart__item__content__settings">
-        <div class="cart__item__content__settings__quantity">
-          <p>Qté : </p>
-          <input
-            type="number"
-            class="itemQuantity"
-            name="itemQuantity"
-            min="1"
-            max="100"
-            value="${cart[i].quantity}"
-          />
-        </div>
-        <div class="cart__item__content__settings__delete">
-          <p class="deleteItem">Supprimer</p>
-        </div>
-      </div>
-    </div>
-  </article>
-  
-    `;
+                      <article class="cart__item" data-id="${cart[i]._id}" data-color="${cart[i].color}">
+                      <div class="cart__item__img">
+                        <img
+                          src=${cart[i].image}
+                          alt=${cart[i].alte}
+                        />
+                      </div>
+                      <div class="cart__item__content">
+                        <div class="cart__item__content__titlePrice">
+                          <h2>${cart[i].name} - ${cart[i].color}</h2>
+                          <p>${cart[i].price} €</p>
+                        </div>
+                        <div class="cart__item__content__settings">
+                          <div class="cart__item__content__settings__quantity">
+                            <p>Qté : </p>
+                            <input
+                              type="number"
+                              class="itemQuantity"
+                              name="itemQuantity"
+                              min="1"
+                              max="100"
+                              value="${cart[i].quantity}"
+                            />
+                          </div>
+                          <div class="cart__item__content__settings__delete">
+                            <p class="deleteItem">Supprimer</p>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                   `;
       itemsContainer.innerHTML = cartStructure;
     }
   }
@@ -86,8 +84,6 @@ function displayTotal() {
     // mettre les prix dans la variable "totalcalcprice"
     totalCalcPrice += productPrice;
 
-    //console.log(totalCalcPrice);
-
     // le total des quantités dans la declaration d'une variable
     let productQuantity = Number(cart[k].quantity);
     // mettre les quantités dans "productQuantity"
@@ -95,13 +91,13 @@ function displayTotal() {
   }
   // Affichage du resultat sur la page panier
   const displayResult = `
-<div class="cart__price">
-<p>
-  Total (<span id="totalQuantity">${totalQty}</span> articles) :
-  <span id="totalPrice">${totalCalcPrice}</span> €
-</p>
-</div>
-`;
+                              <div class="cart__price">
+                              <p>
+                                Total (<span id="totalQuantity">${totalQty}</span> articles) :
+                                <span id="totalPrice">${totalCalcPrice}</span> €
+                              </p>
+                              </div>
+                              `;
   emplacementTotal.innerHTML = displayResult;
 }
 // FONCTION D'AJOUT / MODIFICATION DANS LE LOCALSTORAGE
@@ -116,16 +112,14 @@ function saveLocalStorage(cart) {
 function setDeleteEvent() {
   // selection de tous les boutons supprimer
   let btnDelete = document.querySelectorAll(".deleteItem");
-  console.log(btnDelete);
 
   for (let n = 0; n < btnDelete.length; n++) {
     //cibler le produit  souhaiter et supprimer grâce à son identifiant et sa couleur.
     // ecouter la variable btnDelete avec "click" pour que l'utilisateur supprime un article au click
     btnDelete[n].addEventListener("click", (e) => {
-      console.log(n);
       // declation de la variable elt qui permet de trouver l element cibler dans le DOM
       const elt = btnDelete[n].closest("article");
-      console.log(elt);
+
       // declaration de la variable indexToUpdade qui permet de trouver l'index des element a changer
       const indexToDelete = cart.findIndex((item) => {
         // dans cette fontion on si les index trouver ont les meme couleur et meme id
@@ -134,7 +128,7 @@ function setDeleteEvent() {
           item._id === elt.getAttribute("data-id")
         );
       });
-      console.log(indexToDelete);
+
       // ici on supprime l'article selectionner
       cart.splice(indexToDelete, 1);
       // utilisation de la fonction savelocalestorage pour  mettre a jour le localStorage
@@ -158,18 +152,17 @@ function setQuantityEvent() {
       const newQuantity = e.target.value;
       // Condition if pour verifier que la quantitée est supérieur a 0 sinon message alerte et ne rajoute rien au localstorage
       if (newQuantity > 0) {
-        console.log("positif");
+        // ok
       } else {
         alert("Quantitée insuffisante !");
         return;
       }
       // Condition if pour verifier que la quantitée est inférieur a 100 sinon message alerte et ne rajoute rien au localstorage
       if (newQuantity > 100) {
-        console.log("flop");
         alert("La quantitée maximum est de 100 pour cet article.");
         return;
       } else {
-        console.log("ok");
+        // ok
       }
 
       // Déclation de la variable elt qui permet de trouver l'élément cibler dans le DOM
@@ -302,12 +295,10 @@ form.addEventListener("submit", (e) => {
       },
       products: cart.map((e) => e._id), //array of product _id
     };
-    console.log(order);
     // appel de fetch avec la method post
     orderProducts(order).then((order) => {
       window.location.href =
         "/front/html/confirmation.html?orderId=" + order.orderId;
-      console.log(order.orderId);
     });
   }
 });

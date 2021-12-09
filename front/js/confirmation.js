@@ -1,6 +1,5 @@
 // déclaration d'une const params qui crée un prototype de L url
 const params = new URLSearchParams(window.location.search);
-console.log(params);
 // declaration d'une const orderID qui cible juste L'id de l'url  de la commande
 const orderID = params.get("orderId");
 document.getElementById("orderId").innerHTML = orderID;
@@ -8,10 +7,9 @@ document.getElementById("orderId").innerHTML = orderID;
 // si orderIdqp et que orderIsls existe et qu'il sont egale alors je peux afficher l'orderId dans la la page confirmation
 // sinon je redirige vers la page d'acceuil
 const orderIdqp = orderID;
-console.log(orderIdqp);
 if (!orderIdqp) {
-  console.log("ko");
+  //  ko
   window.location.href = "/index.html";
 } else {
-  console.log("afficher l'orderId dans la page confirmation");
+  //console.log("afficher l'orderId dans la page confirmation");
 }

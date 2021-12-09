@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const productID = params.get("id");
-console.log(productID);
+
 // creation d'une variable cart
 // puis on vas dans le localStorage et avec la methode getItem on lis la clef produit
 //si il y en a pas on cree un array
@@ -10,10 +10,10 @@ cart = JSON.parse(cart);
 let product;
 //Si il nya pas de productid on renvoie en page d'acceuil
 if (!productID) {
-  console.log("ko");
+  //console.log("ko");
   window.location.href = "/index.html";
 } else {
-  console.log("afficher product dans la page product");
+  //console.log("afficher product dans la page product");
 }
 //Appel de la fonction getProduct qui prend en parametre l Id du produit et en suite qui nous rapporte les details du produit
 getProduct(productID).then((productData) => {
@@ -82,7 +82,6 @@ btnCart.addEventListener("click", () => {
     // si pas de produit dans le tableau on l'ajoute
     addProductCart(product, color, quantity);
   }
-  console.log(cart);
   // on ajoute la variable cart au localStorage et on la traduit du format JS au chaine JSON
   localStorage.setItem("cart", JSON.stringify(cart));
 
