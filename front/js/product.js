@@ -10,8 +10,8 @@ cart = JSON.parse(cart);
 let product;
 //Si il nya pas de productid on renvoie en page d'acceuil
 if (!productID) {
+  window.location.href = "./index.html";
   //console.log("ko");
-  window.location.href = "/index.html";
 } else {
   //console.log("afficher product dans la page product");
 }

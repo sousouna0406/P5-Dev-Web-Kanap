@@ -9,7 +9,7 @@ document.getElementById("orderId").innerHTML = orderID;
 const orderIdqp = orderID;
 if (!orderIdqp) {
   //  ko
-  window.location.href = "/index.html";
+  window.location.href = "./index.html";
 } else {
   //console.log("afficher l'orderId dans la page confirmation");
 }

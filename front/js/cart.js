@@ -224,6 +224,10 @@ form.addEventListener("submit", (e) => {
       value
     );
   };
+  // declaration de la variable regEx pour la mettre dans les fonction ADRESS
+  const regeXadress = (value) => {
+    return /([0-9]*) ?([a-zA-Z,\. ]*) ?([0-9]{5}) ?([a-zA-Z])*/.test(value);
+  };
   // declaration de la variable pour message d' alerte sur Email
   const regeXalertEmail = (value) => {
     return `${value}: Saisies incorrect.`;
@@ -262,6 +266,17 @@ form.addEventListener("submit", (e) => {
       return false;
     }
   }
+  //fonction contrôle de la validiter d'adresse
+  function controleAdresse() {
+    const adresse = valuesForm.adresse;
+    if (regeXadress(adresse)) {
+      erreurMessage.adresse.innerHTML = "";
+      return true;
+    } else {
+      erreurMessage.adresse.innerHTML = regeXalertEmail("Adresse");
+      return false;
+    }
+  }
   //fonction contrôle de la validiter de l'email
   function controleEmail() {
     const lEmail = valuesForm.email;
@@ -273,13 +288,19 @@ form.addEventListener("submit", (e) => {
       return false;
     }
   }
-
+  controleAdresse();
+  controleFirstName();
+  controleName();
+  controleCity();
+  controleEmail();
   // Validation du formulaire
   if (
-    controleFirstName() &&
-    controleName() &&
-    controleCity() &&
-    controleEmail()
+    cart.length > 0 &&
+    !erreurMessage.prenom.innerHTML &&
+    !erreurMessage.nom.innerHTML &&
+    !erreurMessage.email.innerHTML &&
+    !erreurMessage.adresse.innerHTML &&
+    !erreurMessage.ville.innerHTML
   ) {
     // mettre l object valuesForm dans le localStorage
     localStorage.setItem("valuesForm", JSON.stringify(valuesForm));
@@ -299,6 +320,8 @@ form.addEventListener("submit", (e) => {
     orderProducts(order).then((order) => {
       window.location.href =
         "/front/html/confirmation.html?orderId=" + order.orderId;
+      // nettoyer le localstorage
+      localStorage.clear();
     });
   }
 });
